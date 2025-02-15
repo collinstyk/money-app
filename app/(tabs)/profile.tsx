@@ -78,7 +78,12 @@ export default function Profile() {
           </View>
         </View>
 
-        <Button icon={<Logout />} width="100%" />
+        <Button
+          icon={<Logout />}
+          width="100%"
+          text="Sign out"
+          variant="outlined"
+        />
       </View>
     </View>
   );

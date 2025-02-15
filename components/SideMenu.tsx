@@ -158,6 +158,7 @@ export default function SideMenu() {
           width={221}
           bottom={56}
           left={30}
+          text="Sign out"
         />
       </Animated.View>
 

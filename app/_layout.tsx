@@ -35,6 +35,19 @@ export default function RootLayout() {
     "SFProRoundedd-bold": require("@/assets/fonts/sf-pro-rounded/SF-Pro-Rounded-Bold.otf"),
     "SFProRounded-black": require("@/assets/fonts/sf-pro-rounded/SF-Pro-Rounded-Black.otf"),
     "SFProRounded-heavy": require("@/assets/fonts/sf-pro-rounded/SF-Pro-Rounded-Heavy.otf"),
+
+    "SFProText-light": require("@/assets/fonts/sf-pro-text/SFProText-Light.ttf"),
+    "SFProText-light-itallic": require("@/assets/fonts/sf-pro-text/SFProText-LightItalic.ttf"),
+    "SFProText-regular": require("@/assets/fonts/sf-pro-text/SFProText-Regular.ttf"),
+    "SFProText-regular-itallic": require("@/assets/fonts/sf-pro-text/SFProText-RegularItalic.ttf"),
+    "SFProText-medium": require("@/assets/fonts/sf-pro-text/SFProText-Medium.ttf"),
+    "SFProText-medium-itallic": require("@/assets/fonts/sf-pro-text/SFProText-MediumItalic.ttf"),
+    "SFProText-semibold": require("@/assets/fonts/sf-pro-text/SFProText-Semibold.ttf"),
+    "SFProText-semibold-itallic": require("@/assets/fonts/sf-pro-text/SFProText-SemiboldItalic.ttf"),
+    "SFProText-bold": require("@/assets/fonts/sf-pro-text/SFProText-Bold.ttf"),
+    "SFProText-bold-itallic": require("@/assets/fonts/sf-pro-text/SFProText-BoldItalic.ttf"),
+    "SFProText-heavy": require("@/assets/fonts/sf-pro-text/SFProText-Heavy.ttf"),
+    "SFProText-heavy-itallic": require("@/assets/fonts/sf-pro-text/SFProText-HeavyItalic.ttf"),
   });
 
   useEffect(() => {
