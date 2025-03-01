@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { TextInput, View, StyleSheet } from "react-native";
 import SearchIcon from "../assets/images/search.svg";
 
-const SearchBar: React.FC = () => {
+type SearchBarProps = {
+  shade?: "light" | "blue";
+};
+
+const SearchBar: React.FC<SearchBarProps> = ({ shade = "light" }) => {
   const [query, setQuery] = useState("");
 
   const handleInputChange = (text: string) => {
@@ -10,7 +14,12 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: shade === "blue" ? "#05199E" : "transparent" },
+      ]}
+    >
       <SearchIcon width={17} height={17} />
       <TextInput
         style={styles.input}

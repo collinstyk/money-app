@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,9 +12,11 @@ import Camera from "../assets/images/camera.svg";
 import LeftArrow from "../assets/images/left-arrow.svg";
 import GrayCheck from "../assets/images/grey-checkmark.svg";
 import BlueCheck from "../assets/images/blue-checkmark.svg";
+import PinkCheck from "../assets/images/pink-checkmark.svg";
 import ColorfulDesign from "@/assets/images/colorful-design.svg";
 
 export default function ProfileEdit() {
+  const [isComplete, setisComplete] = useState(false);
   const [date, setDate] = useState("");
 
   const formatDate = (input: string) => {
@@ -46,6 +48,18 @@ export default function ProfileEdit() {
       dateOfBirth: "",
     },
   });
+
+  useEffect(() => {
+    const isFormComplete =
+      control._formValues.username &&
+      control._formValues.firstName &&
+      control._formValues.lastName &&
+      control._formValues.dateOfBirth &&
+      date.length === 10;
+
+    setisComplete(isFormComplete);
+  }, [control, date]);
+
   return (
     <LinearGradient
       colors={["#4960F9", "#1937FE"]}
@@ -60,6 +74,7 @@ export default function ProfileEdit() {
       <Pressable onPress={() => router.back()}>
         <LeftArrow />
       </Pressable>
+
       {/* ProfileImage */}
       <View
         style={{
@@ -83,16 +98,27 @@ export default function ProfileEdit() {
           control={control}
           rules={{ required: true }}
           render={({ field: { onChange, onBlur, value } }) => (
-            <>
-              <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Username</Text>
+            <View style={styles.fieldContainer}>
+              <Text style={styles.label}>Username</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  paddingRight: 16,
+                }}
+              >
                 <TextInput
                   placeholder="Your username"
                   style={styles.input}
                   placeholderTextColor="#80E0FF"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
                 />
+                {/* to be changed later */}
+                {value && <PinkCheck />}
               </View>
-            </>
+            </View>
           )}
         />
         {errors.username && <Text>Please provide a username.</Text>}
@@ -103,16 +129,26 @@ export default function ProfileEdit() {
           control={control}
           rules={{ required: true }}
           render={({ field: { onChange, onBlur, value } }) => (
-            <>
-              <View style={styles.fieldContainer}>
-                <Text style={styles.label}>First Name</Text>
+            <View style={styles.fieldContainer}>
+              <Text style={styles.label}>First Name</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  paddingRight: 16,
+                }}
+              >
                 <TextInput
                   placeholder="Your name"
                   style={styles.input}
                   placeholderTextColor="#80E0FF"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
                 />
+                {value && <PinkCheck />}
               </View>
-            </>
+            </View>
           )}
         />
         {errors.firstName && <Text>Please tell us first name.</Text>}
@@ -123,16 +159,26 @@ export default function ProfileEdit() {
           control={control}
           rules={{ required: true }}
           render={({ field: { onChange, onBlur, value } }) => (
-            <>
-              <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Last Name</Text>
+            <View style={styles.fieldContainer}>
+              <Text style={styles.label}>Last Name</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  paddingRight: 16,
+                }}
+              >
                 <TextInput
                   placeholder="Your last name"
                   style={styles.input}
                   placeholderTextColor="#80E0FF"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
                 />
+                {value && <PinkCheck />}
               </View>
-            </>
+            </View>
           )}
         />
         {errors.lastName && <Text>Please tell us your last name.</Text>}
@@ -143,18 +189,30 @@ export default function ProfileEdit() {
           control={control}
           rules={{ required: true }}
           render={({ field: { onChange, onBlur, value } }) => (
-            <>
-              <View style={styles.fieldContainer}>
-                <Text style={styles.label}>Date of Birth</Text>
+            <View style={styles.fieldContainer}>
+              <Text style={styles.label}>Date of Birth</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  paddingRight: 16,
+                }}
+              >
                 <TextInput
                   value={date}
-                  onChangeText={(text) => handleChange(text)}
+                  onChangeText={(text) => {
+                    handleChange(text);
+                    onChange(text);
+                  }}
+                  onBlur={onBlur}
                   placeholder="Your birhday (dd-mm-yyyy)"
                   style={styles.input}
                   placeholderTextColor="#80E0FF"
                 />
+                {value && date.length === 10 && <PinkCheck />}
               </View>
-            </>
+            </View>
           )}
         />
         {errors.dateOfBirth && <Text>Please tell us your date of birth.</Text>}
@@ -163,10 +221,10 @@ export default function ProfileEdit() {
       <Button
         width="100%"
         text="Complete"
-        textColor="#2B47FC"
+        textColor={isComplete ? "#2B47FC" : "#c8c8c8"}
         textAlign="center"
         variant="plain"
-        icon={<BlueCheck />}
+        icon={isComplete ? <BlueCheck /> : <GrayCheck />}
       />
     </LinearGradient>
   );
@@ -190,5 +248,6 @@ const styles = StyleSheet.create({
     fontFamily: "SFProText-regular",
     fontSize: 14,
     paddingLeft: 0,
+    width: "90%",
   },
 });

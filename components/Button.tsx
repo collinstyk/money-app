@@ -1,8 +1,28 @@
 import { DimensionValue, Pressable, StyleSheet, Text } from "react-native";
 import React, { cloneElement, ReactElement } from "react";
-import { SvgProps } from "react-native-svg";
 import { LinearGradient } from "expo-linear-gradient";
 import { View } from "react-native";
+
+import PrimaryBackground from "../assets/images/primary-btn-background.svg";
+import Ellipse4 from "../assets/images/Ellipse 4.svg";
+import Ellipse5 from "../assets/images/Ellipse 5.svg";
+
+type ButtonProps = {
+  icon?: ReactElement;
+  width: DimensionValue;
+  bottom?: DimensionValue;
+  left?: DimensionValue;
+  textAlign?: "center" | "left" | "right";
+  textColor?: string;
+  text: string;
+  variant?: "primary" | "secondary" | "outlined" | "plain" | "tertiary";
+  disabled?: boolean;
+  position?: "static" | "relative" | "absolute" | "fixed" | "sticky";
+  fontFamily?: string;
+  fontSize?: number;
+  curvature?: DimensionValue;
+  onPress?: (data?: any) => void;
+};
 
 export default function Button({
   icon,
@@ -14,39 +34,36 @@ export default function Button({
   textColor,
   variant,
   disabled,
+  position,
+  fontFamily,
+  fontSize,
+  curvature,
   onPress,
-}: {
-  icon: ReactElement;
-  width: DimensionValue;
-  bottom?: number;
-  left?: number;
-  textAlign?: "center" | "left" | "right";
-  textColor?: string;
-  text: string;
-  variant?: "primary" | "secondary" | "outlined" | "plain" | "tertiary";
-  disabled?: boolean;
-  onPress?: () => void;
-}) {
+}: ButtonProps) {
   return (
     <Pressable
       style={{
-        borderWidth: 1,
+        borderWidth: variant === "primary" || variant === "secondary" ? 0 : 1,
         borderColor: variant === "outlined" ? "#2743FD" : "transparent",
         backgroundColor: "#fff",
-        borderRadius: 28,
+        borderRadius: curvature ?? 28,
         width: width,
         height: 72,
         flexDirection: "row",
         alignItems: "center",
-
-        justifyContent: textAlign === "center" ? "center" : "space-between",
+        justifyContent: "center",
         left: left ?? 0,
         bottom: bottom ?? 0,
+        overflow: "hidden",
+        position: position ?? "relative",
+        opacity: disabled ? 0.65 : 1,
       }}
       disabled={disabled}
       onPress={onPress}
     >
-      {variant === "primary" && (
+      {variant === "secondary" ||
+      variant === "primary" ||
+      variant === "tertiary" ? (
         <LinearGradient
           colors={["#4960F9", "#1937FE"]}
           start={{ x: 0, y: 0 }}
@@ -56,15 +73,20 @@ export default function Button({
             width: width,
             height: 72,
             paddingHorizontal: 24,
-            borderRadius: 28,
+            borderRadius: curvature ?? 28,
+            flexDirection: "row",
             position: "absolute",
+            alignItems: "center",
+            justifyContent: textAlign === "center" ? "center" : "space-between",
+            gap: textAlign === "center" ? 8 : 0,
           }}
         >
           <Text
             style={{
+              zIndex: 2,
               color: textColor || "#2743fd",
-              fontFamily: "Montserrat-regular",
-              fontSize: 20,
+              fontFamily: fontFamily ?? "Montserrat-regular",
+              fontSize: fontSize ?? 20,
             }}
           >
             {text}
@@ -72,33 +94,44 @@ export default function Button({
 
           {icon && cloneElement(icon)}
         </LinearGradient>
-      )}
-      {variant === "outlined" ||
-        (variant === "plain" && (
-          <View
+      ) : variant === "outlined" || variant === "plain" ? (
+        <View
+          style={{
+            paddingHorizontal: 24,
+            flexDirection: "row",
+            width: width,
+            alignItems: "center",
+            justifyContent: textAlign === "center" ? "center" : "space-between",
+            gap: textAlign === "center" ? 8 : 0,
+          }}
+        >
+          <Text
             style={{
-              paddingHorizontal: 24,
-              flexDirection: "row",
-              width: width,
-              alignItems: "center",
-              justifyContent:
-                textAlign === "center" ? "center" : "space-between",
-              gap: textAlign === "center" ? 8 : 0,
+              zIndex: 2,
+              color: textColor || "#2743fd",
+              fontFamily: fontFamily ?? "Montserrat-regular",
+              fontSize: fontSize ?? 20,
             }}
           >
-            <Text
-              style={{
-                color: textColor || "#2743fd",
-                fontFamily: "Montserrat-regular",
-                fontSize: 20,
-              }}
-            >
-              {text}
-            </Text>
+            {text}
+          </Text>
 
-            {icon && cloneElement(icon)}
-          </View>
-        ))}
+          {icon && cloneElement(icon)}
+        </View>
+      ) : (
+        ""
+      )}
+      {variant === "primary" && (
+        <PrimaryBackground
+          style={{ position: "absolute", top: -1, right: 0 }}
+        />
+      )}
+      {variant === "secondary" && (
+        <Ellipse4 style={{ position: "absolute", bottom: 0, right: 0 }} />
+      )}
+      {variant === "secondary" && (
+        <Ellipse5 style={{ position: "absolute", top: -1, left: 0 }} />
+      )}
     </Pressable>
   );
 }

@@ -62,8 +62,22 @@ export default function RootLayout() {
 
   return (
     <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="signUp" options={{ headerShown: false }} />
+      <Stack.Screen name="signIn" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="profileEdit" options={{ headerShown: false }} />
+      <Stack.Screen name="otp" options={{ headerShown: false }} />
+      <Stack.Screen name="cardsScreen" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="transactionsScreen"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="transferScreen" options={{ headerShown: false }} />
+      <Stack.Screen name="ProfileEdit" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="confirmationScreen"
+        options={{ headerShown: false }}
+      />
     </Stack>
   );
 }

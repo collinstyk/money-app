@@ -30,7 +30,7 @@ export default function Profile() {
           >
             Profile
           </Text>
-          <Link href="/profileEdit">
+          <Link href="/ProfileEdit">
             <FontAwesome6 name="user-pen" size={25} color="#3a3a3a" />
           </Link>
         </View>
