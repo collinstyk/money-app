@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { ReactElement } from "react";
 
 import Button from "./Button";
@@ -17,7 +23,8 @@ export default function AuthScreen({
   btnOnPress: (input: any) => void;
 }) {
   return (
-    <View
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{
         flex: 1,
         overflowY: "auto",
@@ -61,7 +68,7 @@ export default function AuthScreen({
           onPress={btnOnPress}
         />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

@@ -4,9 +4,10 @@ import SearchIcon from "../assets/images/search.svg";
 
 type SearchBarProps = {
   shade?: "light" | "blue";
+  style?: object;
 };
 
-const SearchBar: React.FC<SearchBarProps> = ({ shade = "light" }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ shade = "light", style }) => {
   const [query, setQuery] = useState("");
 
   const handleInputChange = (text: string) => {
@@ -18,6 +19,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ shade = "light" }) => {
       style={[
         styles.container,
         { backgroundColor: shade === "blue" ? "#05199E" : "transparent" },
+        { ...style },
       ]}
     >
       <SearchIcon width={17} height={17} />

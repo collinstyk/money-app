@@ -3,6 +3,10 @@ import { Text, View } from "react-native";
 
 import SmallGreyArrow from "../assets/images/small-grey-arrow.svg";
 import SmallLightBlueArrow from "../assets/images/small-lightblue-arrow.svg";
+import Shopping from "../assets/images/shopping-1.svg";
+import Medicine from "../assets/images/medicine-1.svg";
+import Sport from "../assets/images/sport-1.svg";
+import Travel from "../assets/images/travel-1.svg";
 
 type TransactionProps = {
   category: "shopping" | "medicine" | "sport" | "travel" | string;
@@ -42,8 +46,15 @@ export default function Transaction({
             height: 48,
             width: 48,
             borderRadius: 48,
+            alignItems: "center",
+            justifyContent: "center",
           }}
-        ></View>
+        >
+          {category === "shopping" && <Shopping />}
+          {category === "medicine" && <Medicine />}
+          {category === "sport" && <Sport />}
+          {category === "travel" && <Travel />}
+        </View>
         <View>
           <Text
             style={{

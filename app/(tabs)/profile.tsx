@@ -6,7 +6,7 @@ import ColorfulDesign from "@/assets/images/colorful-design.svg";
 import ProfileImage from "@/components/ProfileImage";
 import Logout from "../../assets/images/logout.svg";
 import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 export default function Profile() {
   return (
@@ -83,6 +83,7 @@ export default function Profile() {
           width="100%"
           text="Sign out"
           variant="outlined"
+          onPress={() => router.push("/")}
         />
       </View>
     </View>

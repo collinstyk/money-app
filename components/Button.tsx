@@ -1,4 +1,10 @@
-import { DimensionValue, Pressable, StyleSheet, Text } from "react-native";
+import {
+  DimensionValue,
+  Pressable,
+  StyleSheet,
+  Text,
+  Animated,
+} from "react-native";
 import React, { cloneElement, ReactElement } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { View } from "react-native";

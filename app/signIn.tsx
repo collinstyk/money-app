@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import AuthScreen from "@/components/AuthScreen";
 import { Controller, useForm } from "react-hook-form";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 import PinkCheck from "../assets/images/pink-checkmark.svg";
 import Eye from "../assets/images/eye.svg";
@@ -20,7 +20,10 @@ export default function Signin() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    console.log(data);
+    router.push("/(tabs)");
+  };
 
   useEffect(() => console.log(errors), [errors]);
 

@@ -20,7 +20,7 @@ import Logout from "../assets/images/logout.svg";
 import { SvgProps } from "react-native-svg";
 import { useTabContext } from "@/hooks/useTabContext";
 import Button from "./Button";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 const menuData = [
   { id: "001", title: "Payments", icon: Payments },
@@ -94,6 +94,8 @@ export default function SideMenu() {
 
   const handleMenuItemPress = (id: string) => {
     setActiveItem(id);
+    if (id === "003") router.push("/cardsScreen");
+    if (id === "002") router.push("/transactionsScreen");
   };
 
   return (

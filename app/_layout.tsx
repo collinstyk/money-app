@@ -78,6 +78,7 @@ export default function RootLayout() {
         name="confirmationScreen"
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="Onboarding" options={{ headerShown: false }} />
     </Stack>
   );
 }

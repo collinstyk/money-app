@@ -1,11 +1,20 @@
 import AuthScreen from "@/components/AuthScreen";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 import PinkCheck from "../assets/images/pink-checkmark.svg";
 import Eye from "../assets/images/eye.svg";
 import EyeHidden from "../assets/images/eye-hidden.svg";
+import { router } from "expo-router";
 
 export default function Signup() {
   const {
@@ -33,14 +42,14 @@ export default function Signup() {
     console.log("Error", errors);
     if (password !== passwordConfirm) return;
     console.log("Form data", data);
+    router.push("/(tabs)");
   };
 
-  useEffect(() => {
-    console.log("Error", errors);
-  }, [errors]);
-
   return (
-    <View style={{ flex: 1, overflowY: "auto" }}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1, overflowY: "auto" }}
+    >
       <AuthScreen title="Sign up" btnOnPress={handleSubmit(onSubmit)}>
         <View style={styles.fieldsWrapper}>
           <Controller
@@ -183,7 +192,7 @@ export default function Signup() {
           />
         </View>
       </AuthScreen>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

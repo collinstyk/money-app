@@ -37,28 +37,19 @@ export default function Welcome() {
       <View style={styles.buttonContainer}>
         <Button
           width="100%"
-          variant="secondary"
-          text="transfer"
-          textColor="#fff"
-          textAlign="right"
-          icon={<WhiteRightArrow />}
-          onPress={() => router.push("/transferScreen")}
-        />
-        <Button
-          width="100%"
           variant="primary"
-          text="Cards"
+          text="Sign in"
           textColor="#fff"
           textAlign="right"
           icon={<WhiteRightArrow />}
-          onPress={() => router.push("/cardsScreen")}
+          onPress={() => router.push("/signIn")}
         />
         <Button
-          text="Transactions"
+          text="Sign up"
           variant="outlined"
           width="100%"
           icon={<BlueRightArrow />}
-          onPress={() => router.push("/transactionsScreen")}
+          onPress={() => router.push("/signUp")}
         />
       </View>
     </View>
